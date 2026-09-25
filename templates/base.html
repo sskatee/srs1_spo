@@ -2,22 +2,44 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Мои книги{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Мои книги</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">Главная</a> |
-            <a href="{{ url_for('books_list') }}">Все книги</a> |
-            <a href="{{ url_for('add_book') }}">Добавить книгу</a>
-        </nav>
-        <hr>
-    </header>
 
-    <main>
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="{{ url_for('index') }}" class="site-logo">Мои книги</a>
+
+        <nav class="site-nav">
+            <a href="{{ url_for('index') }}"
+               class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
+                Главная
+            </a>
+            <a href="{{ url_for('books_list') }}"
+               class="nav-link {% if request.endpoint == 'books_list' %}active{% endif %}">
+                Все книги
+            </a>
+            <a href="{{ url_for('add_book') }}"
+               class="nav-link {% if request.endpoint == 'add_book' %}active{% endif %}">
+                Добавить книгу
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
         {% block content %}{% endblock %}
-    </main>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>SokolovaE-FlaskProject</p>
+    </div>
+</footer>
 
 </body>
 </html>

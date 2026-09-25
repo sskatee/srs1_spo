@@ -23,7 +23,7 @@ def index():
         "index.html",
         total=total,
         avg_rating=avg_rating,
-        last_books=books[-3:][::-1], #последние 3
+        last_books=books[-3:][::-1],
     )
 
 
@@ -31,10 +31,11 @@ def index():
 def books_list():
     genre = request.args.get("genre", "")
     min_rating = request.args.get("min_rating", "")
-    filtered= books
+
+    filtered = books
 
     if genre:
-        filtered= [b for b in filtered if b["genre"] == genre]
+        filtered = [b for b in filtered if b["genre"] == genre]
 
     if min_rating:
         try:
@@ -134,10 +135,12 @@ def delete_book(book_id):
 if __name__ == "__main__":
     books.extend([
         {"id": 1, "title": "Война и Мир", "author": "Лев Толстой",
-         "genre": "Роман", "rating": 5, "review": "Отличная книга!"},
+         "genre": "Роман", "rating": 5, "review": "Бесспорная классика русскрй литературы!"},
         {"id": 2, "title": "Убийство в Восточном экспрессе", "author": "Агата Кристи",
-         "genre": "Детектив", "rating": 4, "review": "Читалось местами сложно, но в целом интересно"},
+         "genre": "Детектив", "rating": 4, "review": " Местами непонятно, но в целом интересно"},
+        {"id": 3, "title": "Великий Гэтсби", "author": "Фрэнсис Скотт Фитцджеральд",
+         "genre": "Роман", "rating": 5, "review": "Стоит прочитать каждому!"},
     ])
-    next_id = 3
+    next_id = 4
 
     app.run(debug=True)
