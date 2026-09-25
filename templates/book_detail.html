@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+    <h2>{{ book.title }}</h2>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Жанр:</strong> {{ book.genre }}</p>
+    <p><strong>Оценка:</strong> {{ book.rating }}/5</p>
+
+    {% if book.review %}
+        <h3>Отзыв</h3>
+        <p>{{ book.review }}</p>
+    {% endif %}
+
+    <p>
+        <a href="{{ url_for('books_list') }}">← Ко всем книгам</a>
+    </p>
+
+    <form method="post" action="{{ url_for('delete_book', book_id=book.id) }}"
+          onsubmit="return confirm('Удалить книгу?');">
+        <button type="submit">Удалить</button>
+    </form>
+{% endblock %}

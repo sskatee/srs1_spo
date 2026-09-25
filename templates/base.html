@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мои книги{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Мои книги</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Главная</a> |
+            <a href="{{ url_for('books_list') }}">Все книги</a> |
+            <a href="{{ url_for('add_book') }}">Добавить книгу</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

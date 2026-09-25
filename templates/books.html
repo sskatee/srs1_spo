@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Все книги{% endblock %}
+{% block content %}
+    <h2>Все книги</h2>
+    <form method="get" action="{{ url_for('books_list') }}">
+        <p>
+            <label>Жанр:
+                <select name="genre">
+                    <option value="">- все -</option>
+                    {% for g in genres %}
+                        <option value="{{ g }}" {% if g == selected_genre %}selected{% endif %}>
+                            {{ g }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Мин. оценка:
+                <input type="number" name="min_rating" min="1" max="5" step="1"
+                       value="{{ min_rating }}">
+            </label>
+            <button type="submit">Фильтровать</button>
+            <a href="{{ url_for('books_list') }}">Сбросить</a>
+        </p>
+    </form>
+
+    {% if books %}
+        <table border="1" cellpadding="6">
+            <tr>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Жанр</th>
+                <th>Оценка</th>
+                <th></th>
+            </tr>
+            {% for b in books %}
+                <tr>
+                    <td>{{ b.title }}</td>
+                    <td>{{ b.author }}</td>
+                    <td>{{ b.genre }}</td>
+                    <td>{{ b.rating }}/5</td>
+                    <td><a href="{{ url_for('book_detail', book_id=b.id) }}">Открыть</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Ничего не найдено.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Добавить книгу{% endblock %}
+{% block content %}
+    <h2>Добавить книгу</h2>
+    <form method="post" action="{{ url_for('add_book') }}">
+        <p>
+            <label for="title">Название:</label><br>
+            <input type="text" id="title" name="title" maxlength="100"
+                   value="{{ form_data.get('title', '') }}">
+            {% if errors.title %}<span style="color:red;">{{ errors.title }}</span>{% endif %}
+        </p>
+
+        <p>
+            <label for="author">Автор:</label><br>
+            <input type="text" id="author" name="author"
+                   value="{{ form_data.get('author', '') }}">
+            {% if errors.author %}<span style="color:red;">{{ errors.author }}</span>{% endif %}
+        </p>
+
+        <p>
+            <label for="genre">Жанр:</label><br>
+            <select id="genre" name="genre">
+                <option value="">- выберите -</option>
+                {% for g in genres %}
+                    <option value="{{ g }}"
+                        {% if g == form_data.get('genre') %}selected{% endif %}>
+                        {{ g }}
+                    </option>
+                {% endfor %}
+            </select>
+            {% if errors.genre %}<span style="color:red;">{{ errors.genre }}</span>{% endif %}
+        </p>
+
+        <p>
+            <label for="rating">Оценка (1–5):</label><br>
+            <input type="number" id="rating" name="rating" min="1" max="5" step="1"
+                   value="{{ form_data.get('rating', '') }}">
+            {% if errors.rating %}<span style="color:red;">{{ errors.rating }}</span>{% endif %}
+        </p>
+
+        <p>
+            <label for="review">Отзыв (необязательно):</label><br>
+            <textarea id="review" name="review" rows="4" cols="40">{{ form_data.get('review', '') }}</textarea>
+        </p>
+
+        <p><button type="submit">Сохранить</button></p>
+    </form>
+{% endblock %}
